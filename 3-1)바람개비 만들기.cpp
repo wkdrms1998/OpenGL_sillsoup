@@ -1,19 +1,19 @@
-//¹è°æ»ö Ä¥ÇÏ±â//////////////////////////////////////////
-// sb6.h Çì´õ ÆÄÀÏÀ» Æ÷ÇÔ½ÃÅ²´Ù.
+//ë°°ê²½ìƒ‰ ì¹ í•˜ê¸°//////////////////////////////////////////
+// sb6.h í—¤ë” íŒŒì¼ì„ í¬í•¨ì‹œí‚¨ë‹¤.
 #include <sb6.h>
 #include <vmath.h>
 
-// sb6::applicationÀ» »ó¼Ó¹Ş´Â´Ù.
+// sb6::applicationì„ ìƒì†ë°›ëŠ”ë‹¤.
 class my_application : public sb6::application
 {
 public:
-	//½¦ÀÌ´õ¸¦ ÄÄÆÄÀÏ
+	//ì‰ì´ë”ë¥¼ ì»´íŒŒì¼
 	GLuint compile_shader(void){
 		GLuint vertex_shader1;
 		GLuint fragment_shader1;
 		GLuint program1;
 
-		//¹öÅØ½º ½¦ÀÌ´õ ¼Ò½º ÄÚµå
+		//ë²„í…ìŠ¤ ì‰ì´ë” ì†ŒìŠ¤ ì½”ë“œ
 		static const GLchar * vertex_shader_source1[] = {
 			"#version 430 core													\n"
 			"																	\n"
@@ -35,7 +35,7 @@ public:
 			"}																	\n"
 		};
 
-		//ÇÁ·¹±×¸ÕÆ® ½¦ÀÌ´õ ¼Ò½º ÄÚµå
+		//í”„ë ˆê·¸ë¨¼íŠ¸ ì‰ì´ë” ì†ŒìŠ¤ ì½”ë“œ
 		static const GLchar * fragment_shader_source1[] = {
 			"#version 430 core							\n"
 			"											\n"
@@ -47,24 +47,24 @@ public:
 			"}											\n"
 		};
 
-		//¹öÅØ½º ½¦ÀÌ´õ¸¦ »ı¼ºÇÏ°í ÄÄÆÄÀÏ
+		//ë²„í…ìŠ¤ ì‰ì´ë”ë¥¼ ìƒì„±í•˜ê³  ì»´íŒŒì¼
 		vertex_shader1 = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(vertex_shader1, 1, vertex_shader_source1, NULL);
 		glCompileShader(vertex_shader1);
 		
-		//ÇÁ·¡±×¸ÕÆ® ½¦ÀÌ´õ¸¦ »ı¼ºÇÏ°í ÄÄÆÄÀÏ
+		//í”„ë˜ê·¸ë¨¼íŠ¸ ì‰ì´ë”ë¥¼ ìƒì„±í•˜ê³  ì»´íŒŒì¼
 		fragment_shader1 = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(fragment_shader1, 1, fragment_shader_source1, NULL);
 		glCompileShader(fragment_shader1);
 		
-		//ÇÁ·Î±×·¥ »ı¼º ½¦ÀÌ´õ ¾îÅÂÄ¡ ¸µÅ©
+		//í”„ë¡œê·¸ë¨ ìƒì„± ì‰ì´ë” ì–´íƒœì¹˜ ë§í¬
 		program1 = glCreateProgram();
 		glAttachShader(program1, vertex_shader1);
 		glAttachShader(program1, fragment_shader1);
 		glLinkProgram(program1);
 
 
-		//½¦ÀÌ´õ »èÁ¦
+		//ì‰ì´ë” ì‚­ì œ
 		glDeleteShader(vertex_shader1);
 		glDeleteShader(fragment_shader1);
 
@@ -120,7 +120,7 @@ public:
 		return program2;
 	}
 
-	//¾ÖÇÃ¸®ÄÉÀÌ¼Ç ÃÊ±âÈ­
+	//ì• í”Œë¦¬ì¼€ì´ì…˜ ì´ˆê¸°í™”
 	virtual void startup() {
 		rendering_program1 = compile_shader();
 		glGenVertexArrays(1, &vertex_array_object);
@@ -131,14 +131,14 @@ public:
 		glBindVertexArray(vertex_array_object);
 	}
 
-	//¾ÖÇÃ¸®ÄÉÀÌ¼Ç Á¾·á½Ã È£Ãâ
+	//ì• í”Œë¦¬ì¼€ì´ì…˜ ì¢…ë£Œì‹œ í˜¸ì¶œ
 	virtual void shutdown(){
 		glDeleteVertexArrays(1, &vertex_array_object);
 		glDeleteProgram(rendering_program1);
 		glDeleteProgram(rendering_program2);
 	}
 
-	// ·»´õ¸µ virtual ÇÔ¼ö¸¦ ÀÛ¼ºÇØ¼­ ¿À¹ö¶óÀÌµùÇÑ´Ù.
+	// ë Œë”ë§ virtual í•¨ìˆ˜ë¥¼ ì‘ì„±í•´ì„œ ì˜¤ë²„ë¼ì´ë”©í•œë‹¤.
 	virtual void render(double currentTime){
 		const GLfloat red[] = {
 			(float)sin(currentTime) * 0.5f + 0.5f,
@@ -151,10 +151,10 @@ public:
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glDrawArrays(GL_TRIANGLES, 2, 3);
 
-		//·»´õ¸µ À§ÇØ »ı¼ºÇÑ ÇÁ·Î±×·¥ °´Ã¼ »ç¿ë
+		//ë Œë”ë§ ìœ„í•´ ìƒì„±í•œ í”„ë¡œê·¸ë¨ ê°ì²´ ì‚¬ìš©
 		glUseProgram(rendering_program1);
 
-		//Á¡±×¸®±â
+		//ì ê·¸ë¦¬ê¸°
 		glPointSize(40.0f);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glDrawArrays(GL_TRIANGLES, 3, 3);
@@ -167,5 +167,5 @@ private:
 	GLuint vertex_array_object;
 };
 
-// DECLARE_MAINÀÇ ÇÏ³ª»ÓÀÎ ÀÎ½ºÅÏ½º
+// DECLARE_MAINì˜ í•˜ë‚˜ë¿ì¸ ì¸ìŠ¤í„´ìŠ¤
 DECLARE_MAIN(my_application)
